@@ -1,37 +1,32 @@
 struct Node<T> {
     data: T,
-    next: *Node<T>,
+    next: Option<Box<Node<T>>>,
 }
 
 impl<T> Node<T> {
-    fn new(pdata: &T) -> Node<T> {
-        Node<T> { pdata, std::ptr::null }
+    fn new(data: T) -> Node<T> {
+        Node { data, next: None }
     }
 }
 
 struct LinkedList<T> {
-    head: *Node<T>,
+    head: Option<Box<Node<T>>>,
 }
 
 impl<T> LinkedList<T> {
     fn new() -> LinkedList<T> {
-        LinkedList<T> { std::ptr::null }
+        LinkedList { head: None }
     }
 
-    fn push(&mut self, pdata: &T) {
-        let new_node = &Node<T>::new(pdata);
-        if (self.head == std::ptr::null) {
-            self.head = new_node;
+    fn push(&mut self, data: T) {
+        let mut new_node = Box::new(Node::new(data));
+
+        let mut current = &mut self.head;
+        while let Some(ref mut node) = *current {
+            current = &mut node.next;
         }
-
-        let *mut tmp_node = self.head;
-        while (tmp_node.next != std::ptr:null) {
-            tmp_node = tmp_node.next;
-        }
-        tmp_node.next = new_node;
-    }
-
-    fn pop() {
-
+        
+        new_node.next = current.take();
+        *current = Some(new_node);
     }
 }
