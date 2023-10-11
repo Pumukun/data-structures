@@ -40,6 +40,11 @@ void pop(LinkedList* ll) {
         return;
     }
 
+    if (ll->head->next == NULL) {
+        ll->head = NULL;
+        return;
+    }
+
     Node* tmp_ptr = ll->head;
     while (tmp_ptr->next->next != NULL) {
         tmp_ptr = tmp_ptr->next;

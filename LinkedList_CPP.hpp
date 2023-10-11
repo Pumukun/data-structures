@@ -45,6 +45,11 @@ public:
             return;
         }
 
+        if (head->next == nullptr) {
+            head = nullptr;
+            return;
+        }
+
         Node<T>* tmp_ptr = head;
         while (tmp_ptr->next->next != nullptr) {
             tmp_ptr = tmp_ptr->next;
