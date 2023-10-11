@@ -4,8 +4,8 @@ class Node {
     public $next;
 
     function __construct($pdata) {
-        $data = $pdata; 
-        $next = NULL;
+        this->$data = $pdata; 
+        this->$next = NULL;
     }
 }
 
@@ -34,12 +34,19 @@ class LinkedList {
         if ($this->head == NULL) {
             return;
         }
+        
+        if ($this->head->next == NULL) {
+            $this->head = NULL;
+            return;
+        }
 
+        $prev_node = NULL;
         $tmp_node = $this->head;
         while ($tmp_node->next != NULL) {
+            $prev_node = $tmp_node;
             $tmp_node = $tmp_node->next;
         }
-        $tmp_node = NULL;
+        $prev_node->next = NULL;
     }
 }
 ?>

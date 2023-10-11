@@ -13,7 +13,7 @@ namespace ll {
     class LinkedList<T> {
         public Node<T> head;
 
-        public LinkenList() {
+        public LinkedList() {
             head = null;
         }
 
@@ -34,10 +34,10 @@ namespace ll {
 
         public void pop() {
             Node<T> tmpNode = head;
-            while (tmpNode.next != null) {
+            while (tmpNode.next.next != null) {
                 tmpNode = tmpNode.next;
             }
-            tmpNode = null;
+            tmpNode.next = null;
             return;
         }
     }

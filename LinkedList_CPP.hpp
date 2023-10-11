@@ -18,9 +18,15 @@ public:
 
     LinkedList(): head(nullptr) {}
     
-    ~LinkedList() = default;
+    ~LinkedList() {
+        while (head != nullptr) {
+            Node<T>* tmp_ptr = head;
+            head = head->next;
+            delete tmp_ptr;
+        }
+    }
 
-    void insert(T& pdata) {
+    void insert(const T& pdata) {
         Node<T>* new_node = new Node<T>(pdata);
         if (head == nullptr) {
             head = new_node;
@@ -32,7 +38,6 @@ public:
             tmp_ptr = tmp_ptr->next;
         }
         tmp_ptr->next = new_node;
-        return;
     }
 
     void pop() {
@@ -41,11 +46,11 @@ public:
         }
 
         Node<T>* tmp_ptr = head;
-        while (tmp_ptr->next != nullptr) {
+        while (tmp_ptr->next->next != nullptr) {
             tmp_ptr = tmp_ptr->next;
         }
-        delete tmp_ptr;
-        return;
+        delete tmp_ptr->next;
+        tmp_ptr->next = nullptr;
     }
 };
 

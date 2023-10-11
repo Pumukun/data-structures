@@ -1,6 +1,11 @@
 public class Node<T> {
     public T data;
     public Node<T> next;
+    
+    public Node(T data) {
+        this.data = data;
+        this.next = null;
+    }
 }
 
 public class LinkedList<T> {
@@ -31,12 +36,18 @@ public class LinkedList<T> {
             return;
         }
 
+        if (head.next == null) {
+            head = null;
+            return;
+        }
+
+
         Node<T> tmpNode = head;
-        while (tmpNode.next != null) {
+        while (tmpNode.next.next != null) {
             tmpNode = tmpNode.next;
         }
 
-        tmpNode = null;
+        tmpNode.next = null;
         return;
     }
 }

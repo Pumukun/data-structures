@@ -13,21 +13,22 @@ typedef struct LinkedList {
 } LinkedList;
 
 void create_list(LinkedList *ll) {
-    ll->head = nullptr;
+    ll->head = NULL;
 }
 
 void insert(LinkedList *ll, void* pdata) {
-    Node* new_node;
+    Node* new_node = (Node*)malloc(sizeof(Node));
+    if (new_node == NULL) { return; }
     new_node->data = pdata;
-    new_node->next = nullptr;
+    new_node->next = NULL;
 
-    if (ll->head == nullptr) {
+    if (ll->head == NULL) {
         ll->head = new_node;
         return;
     }
 
     Node* tmp_ptr = ll->head;
-    while (tmp_ptr->next != nullptr) {
+    while (tmp_ptr->next != NULL) {
         tmp_ptr = tmp_ptr->next;
     }
 
@@ -35,15 +36,16 @@ void insert(LinkedList *ll, void* pdata) {
 }
 
 void pop(LinkedList* ll) {
-    if (ll->head == nullptr) {
+    if (ll->head == NULL) {
         return;
     }
 
     Node* tmp_ptr = ll->head;
-    while (tmp_ptr->next != nullptr) {
+    while (tmp_ptr->next->next != NULL) {
         tmp_ptr = tmp_ptr->next;
     }
-    free(tmp_ptr);
+    free(tmp_ptr->next);
+    tmp_ptr->next = NULL;
 }
 
 #endif
