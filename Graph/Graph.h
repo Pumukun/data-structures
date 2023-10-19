@@ -21,7 +21,7 @@ typedef struct Graph {
 
 void new_graph(Graph*);
 void new_vertex(Vertex*);
-void new_edge(Edge*);
+void new_edge(Edge*, Vertex*, Vertex*);
 
 void add_vertex(Graph*, Vertex*, Vertex*);
 
